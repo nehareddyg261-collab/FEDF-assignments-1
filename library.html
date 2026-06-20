@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Book Management</title>
+</head>
+<body>
+
+<h2>Library Book Management</h2>
+<div id="library"></div>
+
+<script>
+
+class LibraryBook {
+
+    constructor(bookName, writer, availableCopies, ...newCopies) {
+        this.bookName = bookName;
+        this.writer = writer;
+        this.availableCopies = availableCopies;
+        this.newCopies = newCopies;
+    }
+
+    getTotalCopies = () => {
+        return this.newCopies.reduce(
+            (total, copies) => total + copies,
+            this.availableCopies
+        );
+    }
+
+    showDetails() {
+
+        const { bookName, writer } = this;
+
+        return `
+            Book: ${bookName} <br>
+            Author: ${writer} <br>
+            Total Copies: ${this.getTotalCopies()} <br><br>
+        `;
+    }
+}
+
+const b1 = new LibraryBook(
+    "Java Programming",
+    "Ravi Kumar",
+    10,
+    2,
+    3
+);
+
+const b2 = new LibraryBook(
+    "Python Essentials",
+    "Anjali",
+    8,
+    1,
+    4
+);
+
+const b3 = new LibraryBook(
+    "Web Technologies",
+    "Kiran",
+    12,
+    2,
+    1
+);
+
+document.getElementById("library").innerHTML =
+    b1.showDetails() +
+    b2.showDetails() +
+    b3.showDetails();
+
+</script>
+
+</body>
+</html>
