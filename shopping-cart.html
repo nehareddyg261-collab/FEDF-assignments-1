@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Shopping Cart</title>
+</head>
+<body>
+
+<h2>Online Shopping Cart</h2>
+
+<button onclick="displayItems()">
+    View Cart Items
+</button>
+
+<div id="result"></div>
+
+<script>
+
+const electronics = [
+    { productName: "Monitor", cost: 9000 },
+    { productName: "Webcam", cost: 2500 }
+];
+
+const accessories = [
+    { productName: "USB Drive", cost: 800 },
+    { productName: "Speaker", cost: 1800 }
+];
+
+const displayItems = () => {
+
+    const cartItems = [...electronics, ...accessories];
+
+    const billAmount = cartItems.reduce(
+        (total, item) => total + item.cost,
+        0
+    );
+
+    let content = "";
+
+    cartItems.forEach(({ productName, cost }) => {
+
+        content += `
+            <p>Item: ${productName} | Price: ₹${cost}</p>
+        `;
+    });
+
+    content += `
+        <h3>Total Bill: ₹${billAmount}</h3>
+    `;
+
+    document.getElementById("result").innerHTML = content;
+};
+
+</script>
+
+</body>
+</html>
