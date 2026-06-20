@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Inventory System</title>
+</head>
+<body>
+
+<h1>Product Inventory System (Async/Await)</h1>
+
+<button onclick="viewItems()">View Products</button>
+<button onclick="insertItem()">Add Product</button>
+<button onclick="modifyItem()">Update Product</button>
+<button onclick="removeItem()">Delete Product</button>
+
+<pre id="result"></pre>
+
+<script>
+
+const result = document.getElementById("result");
+
+let inventory = [
+    {
+        productId: 101,
+        productName: "Keyboard",
+        cost: 1200
+    },
+    {
+        productId: 102,
+        productName: "Mouse",
+        cost: 800
+    },
+    {
+        productId: 103,
+        productName: "Monitor",
+        cost: 9500
+    }
+];
+async function viewItems() {
+
+    try {
+        result.textContent =
+            "Available Products\n\n" +
+            JSON.stringify(inventory, null, 2);
+    }
+    catch(error) {
+        result.textContent = error;
+    }
+}
+async function insertItem() {
+
+    try {
+
+        let item = {
+            productId: inventory.length + 101,
+            productName: "Webcam",
+            cost: 2500
+        };
+
+        inventory.push(item);
+
+        result.textContent =
+            "Product Added Successfully\n\n" +
+            JSON.stringify(item, null, 2);
+    }
+    catch(error) {
+        result.textContent = error;
+    }
+}
+async function modifyItem() {
+
+    try {
+
+        inventory[0].productName = "Gaming Keyboard";
+        inventory[0].cost = 1800;
+
+        result.textContent =
+            "Product Updated Successfully\n\n" +
+            JSON.stringify(inventory[0], null, 2);
+    }
+    catch(error) {
+        result.textContent = error;
+    }
+}
+async function removeItem() {
+
+    try {
+
+        let removed = inventory.pop();
+
+        result.textContent =
+            "Product Removed Successfully\n\n" +
+            JSON.stringify(removed, null, 2);
+    }
+    catch(error) {
+        result.textContent = error;
+    }
+}
+
+</script>
+
+</body>
+</html>
