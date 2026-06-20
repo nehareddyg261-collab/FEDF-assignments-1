@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Records</title>
+
+    <style>
+        body{
+            font-family: Verdana;
+            margin:20px;
+        }
+
+        h2{
+            color: darkred;
+        }
+
+        .record{
+            background:#f4f4f4;
+            margin:5px;
+            padding:10px;
+            border-radius:5px;
+        }
+
+        button{
+            padding:10px;
+            margin:5px;
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Records</h2>
+
+<div id="records"></div>
+
+<button onclick="refreshAll()">
+    Direct DOM Update
+</button>
+
+<button onclick="refreshSelected()">
+    Virtual DOM Update
+</button>
+
+<script>
+
+let studentData = [
+    "Ravi",
+    "Sowmya",
+    "Karthik",
+    "Anusha",
+    "Teja",
+    "Nikhil",
+    "Pavani",
+    "Manoj",
+    "Keerthi",
+    "Venu"
+];
+
+function displayRecords(){
+
+    let box = document.getElementById("records");
+    box.innerHTML = "";
+
+    for(let i = 0; i < studentData.length; i++){
+
+        let div = document.createElement("div");
+        div.className = "record";
+        div.id = "record" + i;
+        div.innerText = studentData[i];
+
+        box.appendChild(div);
+    }
+}
+
+displayRecords();
+
+function refreshAll(){
+
+    studentData[3] = "Harsha";
+    studentData[8] = "Likitha";
+
+    displayRecords();
+
+    alert("Entire student list refreshed using Direct DOM");
+}
+
+function refreshSelected(){
+
+    studentData[1] = "Pranavi";
+    studentData[6] = "Rohith";
+
+    document.getElementById("record1").innerText = studentData[1];
+    document.getElementById("record6").innerText = studentData[6];
+
+    alert("Only modified student records refreshed");
+}
+
+</script>
+
+</body>
+</html>
