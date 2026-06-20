@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Attendance Tracker</title>
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<h1>Student Attendance Tracker</h1>
+
+<!-- Attendance Form -->
+<div class="input-section">
+
+<input type="number" id="studentId" placeholder="Enter Student ID">
+
+<input type="text" id="studentName" placeholder="Enter Student Name">
+
+<select id="attendanceStatus">
+    <option value="true">Present</option>
+    <option value="false">Absent</option>
+</select>
+
+<div class="button-area">
+    <button onclick="addRecord()">Add Record</button>
+    <button onclick="editRecord()">Update Record</button>
+</div>
+
+</div>
+
+<!-- DOM & Virtual DOM -->
+<div class="button-area">
+    <button onclick="refreshDOM()">Update with DOM</button>
+    <button onclick="refreshVDOM()">Update with Virtual DOM</button>
+</div>
+
+<!-- Attendance Table -->
+<div class="attendance-table">
+
+<table border="1">
+
+<thead>
+<tr>
+    <th>Student ID</th>
+    <th>Student Name</th>
+    <th>Status</th>
+    <th>Operations</th>
+</tr>
+</thead>
+
+<tbody id="attendanceBody">
+    <!-- Records displayed here -->
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
