@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Training Enrollment System</title>
+
+    <style>
+        body{
+            font-family: Verdana;
+            margin:20px;
+            background:#eef7ee;
+        }
+
+        h2{
+            color:darkgreen;
+        }
+
+        button{
+            padding:10px;
+            margin:5px;
+            border:none;
+            border-radius:5px;
+            background:seagreen;
+            color:white;
+            cursor:pointer;
+        }
+
+        #result{
+            margin-top:20px;
+            padding:15px;
+            background:white;
+            border:2px solid seagreen;
+            border-radius:5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Online Training Enrollment System</h2>
+
+<button onclick="showPrograms()">View Programs</button>
+<button onclick="enrollUser()">Enroll User</button>
+<button onclick="modifyEnrollment()">Update Enrollment</button>
+<button onclick="removeEnrollment()">Cancel Enrollment</button>
+
+<div id="result"></div>
+
+<script>
+
+let programs = [
+    "Web Development",
+    "Data Science",
+    "Cloud Computing",
+    "Cyber Security",
+    "AI Fundamentals"
+];
+
+let enrollmentInfo = {};
+
+function display(text){
+    document.getElementById("result").innerHTML = text;
+}
+
+async function showPrograms(){
+
+    try{
+
+        display("Fetching programs...");
+
+        await new Promise(resolve => setTimeout(resolve,1000));
+
+        let data = "";
+
+        for(let item of programs){
+            data += item + "<br>";
+        }
+
+        display("<h3>Available Programs</h3>" + data);
+
+    }
+    catch{
+        display("Unable to load programs");
+    }
+}
+
+async function enrollUser(){
+
+    try{
+
+        display("Processing enrollment...");
+
+        await new Promise(resolve => setTimeout(resolve,1000));
+
+        enrollmentInfo = {
+            userName : "Kavya",
+            program : "Data Science"
+        };
+
+        display(
+            "Enrollment Successful<br>" +
+            "User: " + enrollmentInfo.userName +
+            "<br>Program: " + enrollmentInfo.program
+        );
+    }
+    catch{
+        display("Enrollment failed");
+    }
+}
+
+async function modifyEnrollment(){
+
+    try{
+
+        if(!enrollmentInfo.userName){
+            throw "Enrollment record not found";
+        }
+
+        display("Updating details...");
+
+        await new Promise(resolve => setTimeout(resolve,1000));
+
+        enrollmentInfo.program = "Cloud Computing";
+
+        display(
+            "Enrollment Updated<br>" +
+            "User: " + enrollmentInfo.userName +
+            "<br>New Program: " + enrollmentInfo.program
+        );
+
+    }
+    catch(error){
+        display(error);
+    }
+}
+
+async function removeEnrollment(){
+
+    try{
+
+        if(!enrollmentInfo.userName){
+            throw "Enrollment record not found";
+        }
+
+        display("Removing enrollment...");
+
+        await new Promise(resolve => setTimeout(resolve,1000));
+
+        enrollmentInfo = {};
+
+        display("Enrollment Cancelled Successfully");
+
+    }
+    catch(error){
+        display(error);
+    }
+}
+
+</script>
+
+</body>
+</html>
