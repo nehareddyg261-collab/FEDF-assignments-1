@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Payroll System</title>
+</head>
+<body>
+
+<h2>Employee Payroll System</h2>
+
+<button onclick="displayPayroll()">
+    View Payroll Details
+</button>
+
+<div id="result"></div>
+
+<script>
+
+class StaffMember {
+
+    constructor(empName, baseSalary, ...extraBenefits) {
+        this.empName = empName;
+        this.baseSalary = baseSalary;
+        this.extraBenefits = extraBenefits;
+    }
+
+    calculateSalary = () => {
+
+        let benefitTotal =
+            this.extraBenefits.reduce(
+                (total, value) => total + value,
+                0
+            );
+
+        return this.baseSalary + benefitTotal;
+    }
+}
+
+function displayPayroll() {
+
+    let worker =
+        new StaffMember(
+            "Ravi Kumar",
+            35000,
+            2500,
+            1800,
+            1200
+        );
+
+    let { empName, baseSalary, extraBenefits } = worker;
+
+    document.getElementById("result").innerHTML = `
+        <p>Employee Name: ${empName}</p>
+        <p>Base Salary: ${baseSalary}</p>
+        <p>Benefits: ${extraBenefits.join(", ")}</p>
+        <p>Net Salary: ${worker.calculateSalary()}</p>
+    `;
+}
+
+</script>
+
+</body>
+</html>
