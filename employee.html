@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Salary Management</title>
+</head>
+<body>
+
+<h2>Salary Management System</h2>
+<button onclick="viewRecord()">Show Staff Details</button>
+
+<div id="display"></div>
+
+<script>
+class Worker {
+    constructor(workerName, basePay, extras) {
+        this.workerName = workerName;
+        this.basePay = basePay;
+        this.extras = extras;
+    }
+
+    getSalary() {
+        let extraAmount = 0;
+
+        for (let value of this.extras) {
+            extraAmount += value;
+        }
+
+        return this.basePay + extraAmount;
+    }
+}
+
+function viewRecord() {
+    let staff = new Worker(
+        "Neha Reddy",
+        50000,
+        [2000, 1500, 1000]
+    );
+
+    document.getElementById("display").innerHTML =
+        "<p>Employee Name: " + staff.workerName + "</p>" +
+        "<p>Base Pay: " + staff.basePay + "</p>" +
+        "<p>Extra Benefits: " + staff.extras.join(", ") + "</p>" +
+        "<p>Net Salary: " + staff.getSalary() + "</p>";
+}
+</script>
+
+</body>
+</html>
