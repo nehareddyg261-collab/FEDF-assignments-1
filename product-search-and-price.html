@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Inventory Viewer</title>
+
+    <style>
+        body{
+            font-family: Verdana;
+            padding:20px;
+            background:#eef2ff;
+        }
+
+        h1{
+            color:darkred;
+        }
+
+        input{
+            padding:8px;
+            width:250px;
+        }
+
+        button{
+            padding:8px 12px;
+            cursor:pointer;
+        }
+
+        .item{
+            background:white;
+            margin-top:10px;
+            padding:10px;
+            border-radius:5px;
+            border:1px solid #999;
+        }
+
+        #amount{
+            margin-top:20px;
+            font-size:20px;
+            font-weight:bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Product Inventory Viewer</h1>
+
+<input
+    type="text"
+    id="searchInput"
+    placeholder="Enter Product Name"
+    onkeyup="findProduct()"
+>
+
+<button onclick="activateSearch()">
+    Focus Input
+</button>
+
+<div id="items"></div>
+
+<div id="amount"></div>
+
+<script>
+
+let inventoryItems = [
+    { pid: 1, itemName: "Monitor", itemPrice: 9000 },
+    { pid: 2, itemName: "Mouse", itemPrice: 700 },
+    { pid: 3, itemName: "Printer", itemPrice: 6500 },
+    { pid: 4, itemName: "Speaker", itemPrice: 2500 }
+];
+
+function showItems(data){
+
+    let area = document.getElementById("items");
+    area.innerHTML = "";
+
+    let total = 0;
+
+    data.forEach(item => {
+
+        total += item.itemPrice;
+
+        area.innerHTML += `
+            <div class="item">
+                <h3>${item.itemName}</h3>
+                <p>Price: ₹${item.itemPrice}</p>
+                <button onclick="deleteItem(${item.pid})">
+                    Delete
+                </button>
+            </div>
+        `;
+    });
+
+    document.getElementById("amount").innerHTML =
+        "Inventory Value: ₹" + total;
+}
+
+showItems(inventoryItems);
+
+function findProduct(){
+
+    let keyword =
+        document.getElementById("searchInput").value.toLowerCase();
+
+    document.title = keyword || "Product Inventory Viewer";
+
+    let result = inventoryItems.filter(item =>
+        item.itemName.toLowerCase().includes(keyword)
+    );
+
+    showItems(result);
+}
+
+function activateSearch(){
+    document.getElementById("searchInput").focus();
+}
+
+function deleteItem(id){
+
+    inventoryItems =
+        inventoryItems.filter(item => item.pid !== id);
+
+    findProduct();
+}
+
+</script>
+
+</body>
+</html>
