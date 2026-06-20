@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Staff Record System</title>
+</head>
+<body>
+
+<h1>Staff Record System (Promises)</h1>
+
+<button onclick="showStaff()">View Staff</button>
+<button onclick="insertStaff()">Add Staff</button>
+<button onclick="editStaff()">Modify Staff</button>
+<button onclick="removeStaff()">Delete Staff</button>
+
+<pre id="result"></pre>
+
+<script>
+    const result = document.getElementById("result");
+
+    let staffList = [
+        { id: 101, name: "Rahul", email: "rahul@gmail.com" },
+        { id: 102, name: "Priya", email: "priya@gmail.com" },
+        { id: 103, name: "Kiran", email: "kiran@gmail.com" }
+    ];
+
+    function showStaff() {
+        result.textContent =
+            "Staff Records\n\n" +
+            JSON.stringify(staffList, null, 2);
+    }
+
+    function insertStaff() {
+        let newStaff = {
+            id: staffList.length + 101,
+            name: "Anjali",
+            email: "anjali@gmail.com"
+        };
+
+        staffList.push(newStaff);
+
+        result.textContent =
+            "New Staff Added\n\n" +
+            JSON.stringify(newStaff, null, 2);
+    }
+
+    function editStaff() {
+        staffList[0].name = "Rahul Kumar";
+
+        result.textContent =
+            "Staff Record Modified\n\n" +
+            JSON.stringify(staffList[0], null, 2);
+    }
+
+    function removeStaff() {
+        let removedStaff = staffList.pop();
+
+        result.textContent =
+            "Staff Removed\n\n" +
+            JSON.stringify(removedStaff, null, 2);
+    }
+</script>
+
+</body>
+</html>
